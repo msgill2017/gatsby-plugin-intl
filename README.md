@@ -1,5 +1,7 @@
 # gatsby-plugin-react-intl
 
+> If can, try theme [gatsby-theme-i18n](https://github.com/gatsbyjs/themes/tree/master/packages/gatsby-theme-i18n), this plugin will no longer be actively maintained
+
 > `gatsby-plugin-react-intl` has supported gatsby v3! Please upgrade `gatsby-plugin-react-intl` to `^3.0.0` to use it
 
 > For gatsby v2, please use `gatsby-plugin-react-intl@1.3.0`
