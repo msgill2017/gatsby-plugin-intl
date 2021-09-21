@@ -6,6 +6,11 @@
   "bugs": {
     "url": "https://github.com/theowenyoung/gatsby-plugin-intl"
   },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "__tests__/fixtures/intl"
+    ]
+  },
   "dependencies": {
     "@babel/runtime": "^7.13.9",
     "@formatjs/intl-pluralrules": "^4.0.11",

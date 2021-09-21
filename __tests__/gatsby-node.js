@@ -37,6 +37,7 @@ it(`should read translations from file and create corresponding pages`, async ()
   const pluginOptions = {
     languages: [`es`],
     defaultLanguage: `es`,
+    ext: "ts",
     path: `${__dirname}/fixtures/intl`,
   }
 
@@ -55,6 +56,7 @@ it(`it should not generate locale pages when ignoredPaths matched`, async () => 
   const pluginOptions = {
     languages: [`es`],
     defaultLanguage: `es`,
+    ext: "ts",
     path: `${__dirname}/fixtures/intl`,
     ignoredPaths: ["/test/**"],
   }
@@ -81,6 +83,7 @@ it(`it should generate locale pages when ignoredPaths not matched`, async () => 
   const pluginOptions = {
     languages: [`es`],
     defaultLanguage: `es`,
+    ext: "ts",
     path: `${__dirname}/fixtures/intl`,
     ignoredPaths: ["/test/**"],
   }
@@ -110,6 +113,7 @@ it(`it should not generate locale pages when redirectDefaultLanguageToRoot is tr
   const pluginOptions = {
     languages: [`es`],
     defaultLanguage: `es`,
+    ext: "ts",
     path: `${__dirname}/fixtures/intl`,
     redirectDefaultLanguageToRoot: true,
   }
@@ -133,6 +137,7 @@ it(`it should generate locale pages when redirectDefaultLanguageToRoot is false`
   const pluginOptions = {
     languages: [`es`],
     defaultLanguage: `es`,
+    ext: "ts",
     path: `${__dirname}/fixtures/intl`,
     redirectDefaultLanguageToRoot: false,
   }
@@ -158,6 +163,7 @@ it(`should crash when translations file doesn't exist`, async () => {
   const pluginOptions = {
     languages: [`es`, `en`],
     defaultLanguage: `es`,
+    ext: "ts",
     path: `${__dirname}/fixtures/intl`,
   }
 
