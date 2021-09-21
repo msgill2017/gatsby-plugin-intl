@@ -1,5 +1,5 @@
 const webpack = require("webpack")
-const { isMatch } = require("./util")
+const { isMatch, isJsonExt, messagesJsonstring } = require("./util")
 
 function flattenMessages(nestedMessages, prefix = "") {
   return Object.keys(nestedMessages).reduce((messages, key) => {
@@ -21,7 +21,9 @@ exports.onCreateWebpackConfig = ({ actions, plugins }, pluginOptions) => {
   if (!languages.includes(defaultLanguage)) {
     languages.push(defaultLanguage)
   }
-  const regex = new RegExp("(" + languages.map(l => l.split("-")[0]).join("|") + ")$")
+  const regex = new RegExp(
+    "(" + languages.map(l => l.split("-")[0]).join("|") + ")$"
+  )
   actions.setWebpackConfig({
     resolve: { fallback: { path: require.resolve("path-browserify") } },
     plugins: [
@@ -49,6 +51,7 @@ exports.onCreatePage = async ({ page, actions }, pluginOptions) => {
   const { createPage, deletePage } = actions
   const {
     path = ".",
+    ext = "json",
     languages = ["en"],
     defaultLanguage = "en",
     fallbackLanguage = "",
@@ -60,14 +63,16 @@ exports.onCreatePage = async ({ page, actions }, pluginOptions) => {
   const getMessages = (path, language) => {
     try {
       // TODO load yaml here
-      const messages = require(`${path}/${language}.json`)
-
+      const fileName = `${path}/${language}.${ext}`
+      const messages = isJsonExt(ext)
+        ? require(fileName)
+        : messagesJsonstring(fileName, ext)
       return flattenMessages(messages)
     } catch (error) {
       if (error.code === "MODULE_NOT_FOUND") {
         process.env.NODE_ENV !== "test" &&
           console.error(
-            `[gatsby-plugin-intl] couldn't find file "${path}/${language}.json"`
+            `[gatsby-plugin-intl] couldn't find file "${path}/${language}.${ext}"`
           )
       }
 
