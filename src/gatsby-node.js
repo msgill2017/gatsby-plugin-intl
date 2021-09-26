@@ -64,12 +64,12 @@ exports.onCreatePage = async ({ page, actions }, pluginOptions) => {
     try {
       // TODO load yaml here
       const fileName = `${path}/${language}.${ext}`
-      console.log("fnmae", fileName)
-      console.log(isJsonExt(ext))
-      const messages = isJsonExt(ext)
-        ? require(fileName)
-        : messagesJsonstring(fileName, ext)
-      console.log(messages)
+
+      const messages =
+        ext == "json"
+          ? require(fileName)
+          : JSON.stringify(require(fileName)["default"])
+
       return flattenMessages(messages)
     } catch (error) {
       if (error.code === "MODULE_NOT_FOUND") {
